@@ -1,0 +1,43 @@
+{
+  "name": "busara-survey-backend",
+  "version": "1.0.0",
+  "description": "Busara survey backend",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "engines": {
+    "node": "14.17.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sagspot/busara-survey-backend.git"
+  },
+  "keywords": [
+    "busara",
+    "survey"
+  ],
+  "author": "Oliver Sagala",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sagspot/busara-survey-backend/issues"
+  },
+  "homepage": "https://github.com/sagspot/busara-survey-backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "chalk": "^4.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.2",
+    "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
