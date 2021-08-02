@@ -11,8 +11,9 @@ API containing data-collection forms
 - [General Info](#general-information)
 - [Technologies Used](#technologies-used)
 - [Usage](#usage)
+- [Environment variables](#environment-variables)
 - [Project Status](#project-status)
-<!-- - [Room for Improvement](#room-for-improvement) -->
+- [Room for Improvement](#room-for-improvement)
 - [Acknowledgements](#acknowledgements)
 - [Contact](#contact)
 
@@ -32,13 +33,17 @@ This project was born from an Interview with Burasa team. I was given an API, _w
 
 Find a detailed usage description of the api from the link in the about section of this respository
 
+## Environment variables
+
+Make your environment variables based on the .env.example file
+
 ## Project Status
 
 Project is: _in progress_ .
 
-<!-- ## Room for Improvement
+## Room for Improvement
 
--  -->
+- Connect with a front end app
 
 ## Acknowledgements
 
