@@ -15,55 +15,63 @@ export const getForms = async (req, res) => {
 };
 
 export const getForm = async (req, res) => {
-  const formId = req.params.formId;
-  // try {
-  Form.aggregate([
-    {
-      $match: { id: formId },
-    },
-    {
-      $lookup: {
-        from: 'Page',
-        localField: 'pages',
-        foreignField: '_id',
-        as: 'students',
+  try {
+    const formId = req.params.formId;
+    /*
+    const data = await Form.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(formId) } },
+      {
+        $lookup: {
+          from: Page.collection.name,
+          localField: '_id',
+          foreignField: 'form',
+          as: 'pages',
+        },
       },
-    },
-    {
-      $lookup: {
-        from: 'hobbies',
-        localField: 'hobbyId',
-        foreignField: '_id',
-        as: 'hobbies',
+      { $unwind: { path: '$pages', preserveNullAndEmptyArrays: true } },
+      { $sort: { 'pages.level': -1 } },
+      {
+        $group: {
+          _id: '$_id',
+          pages: { $push: '$pages' },
+        },
       },
-    },
-    {
-      $lookup: {
-        from: 'course',
-        localField: 'courseId',
-        foreignField: '_id',
-        as: 'courses',
+      {
+        $lookup: {
+          from: Section.collection.name,
+          localField: '_id',
+          foreignField: 'page',
+          as: 'sections',
+        },
       },
-    },
-    {
-      $sort: {
-        createdAt: -1,
+    ]);
+    */
+    const data = await Form.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(formId) } },
+      {
+        $graphLookup: {
+          from: Page.collection.name,
+          startWith: '$_id',
+          connectFromField: '_id',
+          connectToField: 'form',
+          as: 'pages',
+        },
       },
-    },
-    {
-      $unwind: '$author',
-    },
-  ])
-    .then((data) => {
-      return res.status(200).json({ data });
-      // return data
-    })
-    .throw((err) => console.log(err));
-
-  //   res.status(200).json({ form });
-  // } catch (err) {
-  //   res.status(500).json({ error: err });
-  // }
+      { $unwind: { path: '$pages', preserveNullAndEmptyArrays: true } },
+      { $sort: { 'pages.level': -1 } },
+      {
+        $group: {
+          _id: '$_id',
+          // formDetails: { $first: '$$ROOT' },
+          pages: { $push: '$pages' },
+        },
+      },
+      // { $replaceRoot: { newRoot: '$formDetails' } },
+    ]);
+    return res.status(200).json({ data });
+  } catch (err) {
+    res.status(500).json({ msg: err });
+  }
 };
 
 export const postForm = async (req, res) => {

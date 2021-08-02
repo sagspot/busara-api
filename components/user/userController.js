@@ -43,7 +43,7 @@ export const users_post_register = async (req, res) => {
     };
 
     const token = jwt.sign(currentUser, process.env.JWT_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '3h',
     });
 
     res.status(201).json({ user: currentUser, token });
@@ -67,7 +67,7 @@ export const users_post_login = async (req, res) => {
     const token = jwt.sign(
       { id: user._id, name: user.full_name, email: user.email },
       process.env.JWT_SECRET,
-      { expiresIn: '1h' }
+      { expiresIn: '3h' }
     );
     res.status(200).json({ message: 'Authentication successful', token });
   } catch (err) {
